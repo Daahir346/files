@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // import the class
+            StreamWriter outputFile;
+            //create a new file
+            outputFile = File.CreateText("output.txt");
+            outputFile.WriteLine("hello world");
+            outputFile.WriteLine("welcome to C#");
+            outputFile.WriteLine("my name is Abdirahman");
+            outputFile.WriteLine("This is my first file");
+
+            //close the file
+            outputFile.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+
+            if (File.Exists("output.txt"))
+            {
+                File.WriteAllText("output.txt", "");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            StreamReader inputFile;
+            inputFile = File.OpenText("output.txt");
+
+            String line;
+            while (inputFile.EndOfStream == false)
+            {
+                line = inputFile.ReadLine();
+                listBox1.Items.Add(line);
+            }
+
+            inputFile.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            File.Delete("output.txt");
+        }
+    }
+}
